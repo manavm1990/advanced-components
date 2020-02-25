@@ -21,31 +21,27 @@ class Dep {
   }
 }
 
-// Each property will be it's own instance of 'Dep.'
 let data = (() => ({
   price: 5,
   quantity: 2
 }))();
 
+// Should have separate 'Dep' instance for each property else all fxns. will run each time. 🙅🏽‍♂️
+const deps = {};
+
 Object.keys(data).forEach(key => {
-  const dep = new Dep();
+  deps[key] = new Dep();
+});
 
-  let internalValue = data[key];
-
-  Object.defineProperty(data, key, {
-    // For just the price property
-
-    get() {
-      dep.depend();
-      return internalValue;
-    },
-
-    set(newVal) {
-      internalValue = newVal;
-      // Create a set method
-      dep.notify();
-    }
-  });
+const observedData = new Proxy(data, {
+  get(obj, key, _) {
+    deps[key].depend();
+    return obj[key];
+  },
+  set(obj, key, newValue) {
+    obj[key] = newValue;
+    deps[key].notify();
+  }
 });
 
 let watcher = fxn => {
@@ -55,9 +51,13 @@ let watcher = fxn => {
 };
 
 watcher(() => {
-  total = data.price * data.quantity;
+  console.log("total ran!");
+
+  total = observedData.price * observedData.quantity;
 });
 
 watcher(() => {
-  salePrice = data.price * 0.9;
+  console.log("saleprice ran!");
+
+  salePrice = observedData.price * 0.9;
 });
