@@ -10,10 +10,12 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@vue/eslint-config-prettier": "^6.0.0",
     "browser-sync": "^2.26.7",
     "eslint": "^6.6.0",
     "eslint-config-prettier": "^6.5.0",
     "eslint-plugin-prettier": "^3.1.1",
+    "eslint-plugin-vue": "^6.2.1",
     "prettier": "1.19.1",
     "stylelint": "^11.1.1",
     "stylelint-config-prettier": "^6.0.0",
@@ -21,8 +23,5 @@
     "stylelint-prettier": "^1.1.1",
     "stylelint-vscode": "^7.0.0-6"
   },
-  "dependencies": {
-    "@vue/eslint-config-prettier": "^6.0.0",
-    "eslint-plugin-vue": "^6.2.1"
-  }
+  "dependencies": {}
 }
