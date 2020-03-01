@@ -19,6 +19,6 @@
   },
   "rules": {
     "prettier/prettier": "warn",
-    "no-unused-vars": "warn"
+    "eslint no-unused-vars": ["error", { "argsIgnorePattern": "^_" }]
   }
 }
